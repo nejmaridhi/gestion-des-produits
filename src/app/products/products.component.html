@@ -1,0 +1,55 @@
+<div class="container">
+
+    
+    <div class="card" >
+        <div class="card-header">Products List</div>
+        <div class="card-body">
+            <form [formGroup]="searchFormGroup" (ngSubmit)="FunctionSearch()" >
+                <div class="input-group">
+                    <label class="input-group-text">keyword:</label>
+                    <input type="text" class="form-control" formControlName="keyword">
+                    <button class="btn btn-info">
+                        <i class="bi bi-search"></i>
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th><th>name</th><th>prix</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let p of products">
+                    <td>{{p.id}}</td>
+                    <td>{{p.name}}</td>
+                    <td>{{p.prix}}</td>
+                    <td>
+                        <i *ngIf="p.promotion==true" class="bi bi-heart-fill text-success"></i>
+                    </td>
+                    <td>
+                        <button class="btn btn-success">
+                            <span *ngIf="p.promotion==true" >Promo OFF</span>
+                            <span *ngIf="p.promotion==false">Promo ON</span>
+                        </button>
+                    </td>
+                    <td *ngIf="authService.hasRole('ADMIN')">
+                        <button (click)="deleteProducts(p)" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                         
+                         
+
+                    </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
